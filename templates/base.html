@@ -1,35 +1,108 @@
 {% load static %}
-<html lang="">
-<!-- To declare your language - read more here: https://www.w3.org/International/questions/qa-html-language-declarations -->
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>AEC SHOPPING HUB</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link href="{% static 'hm/layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AEC SHOPPING HUB</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom styling for the navbar */
+        .cart-container {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        }
+
+        .cart-text {
+        margin-left: 5px; /* Space between icon and text */
+        font-size: 16px; /* Adjust font size as needed */
+        }
+
+        .navbar-nav .nav-link {
+            font-size: 16px;
+            margin: 0 10px;
+        }
+
+        .notification {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .notification .badge {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        padding: 0 5px;
+        font-size: 10px;
+        font-weight: bold;
+        line-height: 1;
+        transform: translate(50%, -50%);
+        }
+    </style>
 </head>
 <body id="top">
+    <!-- Bootstrap Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">AEC SHOPPING HUB</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
 
-  <div class="wrapper row1">
-    <header id="header" class="hoc clear">
-      <div id="logo" class="fl_left">
+                <li class="nav-item active">
+    <a class="nav-link notification" href="{% url 'cartDetails' %}">
+        <div class="cart-container">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-text">Cart</span>
+            {% if itc %}
+                <span class="badge">{{ itc }}</span>
+            {% endif %}
+        </div>
+    </a>
+</li>
 
-        <h1><a href="/">AEC SHOPPING HUB</a></h1>
-      </div>
-      <nav id="mainav" class="fl_right">
-        <ul class="clear">
-          <li class="active"><a href="/">HOME</a></li>
-          <li class="active"><a href="{% url 'cartDetails' %}">CART{{itc}}</a></li>
-          <li class="active"><a href="/">LOGOUT</a></li>
-          <li class="active"><a href="/">LOGIN</a></li>
-          <li class="active"><a href="/">REGISTER</a></li>
 
-        </ul>
-        </ul>
-      </nav>
-    </header>
-  </div>
-</div>
-{% block content %}
-{% endblock %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">
+                        <i class="fas fa-user-plus"></i> Register
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Content Block -->
+    {% block content %}
+    {% endblock %}
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
