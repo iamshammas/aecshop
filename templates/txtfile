@@ -1,0 +1,22 @@
+<div class="wrapper row0">
+    <div id="topbar" class="hoc clear">
+      <div class="fl_right">
+        <ul class="nospace">
+          <li id="searchform">
+            <div>
+              <form action="#"method="post">
+                <fieldset>
+                  <legend>Quick search: </legend>
+                  <input type="text" placeholder="enter search term">
+                  <button type="submit"><i class="fas fa-search"></i> </button>
+                </fieldset>
+
+              </form>
+            </div>
+
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>

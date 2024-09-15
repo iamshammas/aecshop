@@ -1,0 +1,11 @@
+<li class="dropdown">
+                <a class="drop" href="#">Filter</a>
+          <ul class="dropdown-menu">
+              <!-- Add your dropdown menu items here -->
+                <li><a href="/">All Products</a></li>
+                {% for i in ct %}
+                <li><a href={{i.get_url}}>{{i.name}}</a></li>
+                {% endfor %}
+                </li>
+
+                above lillath base.html il Home nteth kayinnit aan

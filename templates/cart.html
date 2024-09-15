@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Shopping Cart</title>
+	<style>
+		/* Add some basic styling to make the page look decent */
+		body {
+			font-family: Arial, sans-serif;
+			margin: 20px;
+			background-color: black;
+		}
+
+		.cart-container {
+			width: 80%;
+			margin: 40px auto;
+			padding: 20px;
+			border: 1px solid #ddd;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			background-color: #023020;
+		}
+
+		.cart-header {
+			background-color: black;
+			padding: 10px;
+			border-radius: 10px;
+			border-bottom: 1px solid #ddd;
+		}
+
+		.cart-items {
+			padding: 10px;
+		}
+
+		.cart-item {
+			padding: 10px;
+			border-bottom: 1px solid #ddd;
+			display: flex;
+			align-items: center;
+		}
+
+		.cart-item:last-child {
+			border-bottom: none;
+		}
+
+		.cart-item img {
+			width: 80px;
+			height: 80px;
+			margin-right: 10px;
+		}
+
+		.cart-item .item-info {
+			flex: 1;
+		}
+
+		.cart-item .item-name {
+			font-weight: bold;
+			font-size: 18px;
+		}
+
+		.cart-item .item-price {
+			font-size: 18px;
+			color: #666;
+		}
+
+		.cart-item .item-quantity {
+			margin-left: 10px;
+		}
+
+		.cart-item .item-remove {
+			color: #red;
+			cursor: pointer;
+		}
+
+		.cart-footer {
+			background-color: black;
+			padding: 10px;
+			border-radius: 10px;
+			border-top: 1px solid #ddd;
+		}
+
+		.cart-footer .subtotal {
+			font-size: 18px;
+			font-weight: bold;
+		}
+
+		.cart-footer .checkout-btn {
+			background-color: #4CAF50;
+			color: #fff;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		.cart-footer .checkout-btn:hover {
+			background-color: #3e8e41;
+		}
+
+		.cart-actions {
+			margin-top: 20px;
+		}
+
+		.cart-actions button {
+			background-color: #4CAF50;
+			color: #fff;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		.cart-actions button:hover {
+			background-color: #3e8e41;
+		}
+	</style>
+</head>
+<body>
+	<div class="cart-container">
+		<header class="cart-header">
+			<h2>Shopping Cart</h2>
+		</header>
+		{% for i in ci %}
+		<section class="cart-items">
+			<div class="cart-item">
+				<img src={{i.prodt.img.url}} alt="{{i.prodt.name}}">
+				<div class="item-info">
+					<a href="{{ i.prodt.get_url }}">
+    					<div class="item-name">{{ i.prodt.name }}</div>
+					</a>
+					<div class="item-id">ID: {{i.prodt.id}}</div>
+					<div class="item-price">Price: {{i.total}} INR</div>
+					<div class="item-qty"><a href="{% url 'cart_decrement' i.prodt.id %}">-</a> Qty: {{i.qty}} <a href="{% url 'addcart' i.prodt.id %}">+</a></div>
+					<div class="item-quantity">
+						<p>Qty: </p><input type="number" value="{{i.qty}}" min="1" max="10">
+					</div>
+				</div><br>
+				<div >+ {{i.qty}} -</div>
+				<br><br><br>
+				<a href="{% url 'remove' i.prodt.id %}"><button class="item-remove" aria-label="Remove Product 1">Remove</button></a>
+			</div>
+			<!-- Add more cart items here -->
+		</section> <br><hr>
+		{% endfor %}
+		<footer class="cart-footer">
+			<div class="subtotal">Subtotal: {{t}} INR <button class="checkout-btn">Proceed to Checkout</button>
+			</div>
+		</footer>
+
+		<div class="cart-actions">
+			<button>Update Cart</button> <br>
+			<button>Apply Coupon</button>
+		</div>
+
+	</div>
+</body>
+
+{% endblock %}
